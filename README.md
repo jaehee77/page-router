@@ -65,6 +65,7 @@ HTML과 연결하는 Hydration(수화) 과정도 오래 걸리게 되고 결론�
 
 <br>
 <br>
+
 ### API Routes
 
 Next.js에서 API를 구축할 수 있게 해주는 기능  
@@ -91,6 +92,7 @@ export default function handler(
 }
 ```
 **localhost:3000/api/hello** 경로에서 데이터 확인 가능
+
 <br>
 <br>
   
@@ -98,6 +100,7 @@ export default function handler(
 
 <br>
 <br>
+
 ### Next.js src 폴더 구조 참고용
 
 ```
