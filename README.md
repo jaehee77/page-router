@@ -1,7 +1,12 @@
+## 사전 렌더링(pre-rendering)
+- 브라우저의 요청에 사전에 렌더링이 완료된 HTML을 응답하는 렌더링 방식
+- Client Side Rendering의 방식을 효율적으로 해결하는 기술
+
+<br>
+
 ## _app.tsx (app 컴포넌트의 역할)
 
-### export default function App({ Component, pageProps }: AppProps)
-
+`export default function App({ Component, pageProps }: AppProps)`
 ```
 Component : pages 폴더내에 있는 컴포넌트를 불러옴
 즉, 페이지 역할을 할 컴포넌트를 받아옴
@@ -183,3 +188,30 @@ export default function App({
   );
 }
 ```
+
+<br>
+<br>
+
+# Next.js의 사전 렌더링과 데이터 페칭
+
+### React App의 데이터 페칭
+- 컴포넌트 마운트(ex.useEfftect) 이후에 발생함
+- 데이터 요청이 느려지게 되는 단점 발생
+
+### Next App의 데이터 페칭
+- 사전 렌더링중 발생함(당연히 컴포넌트 마운트 이후에도 발생 가능)
+- 데이터 요청 시점이 매우 빨라지는 장점 있음 
+- Next.js는 다양한 방식의 사전 렌더링을 제공해 주고 있음
+
+### Next.js의 다양한 사전 렌더링 방식
+1. 서버 사이드 렌더링(SSR)
+- 가장 기본적인 사전 렌더링 방식
+- 요청이 들어올 때마다 사전 렌더링을 진행함
+
+2. 정적 사이트 생성(SSG)
+- 초기 요청시 사전 렌더링중 데이터 페칭까지 완료하여 렌더링을 함
+- 빌드 타임에 미리 페이지를 사전 렌더링 해둠
+
+3. 증분 정적 재생성(ISR)
+- ???
+
