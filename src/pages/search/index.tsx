@@ -1,8 +1,22 @@
+import { ReactNode } from "react";
+import SearchableLayout from "@/layout/SearchableLayout";
+import { useRouter } from "next/router";
+import books from "@/mock/books.json";
+import BookItem from "@/components/BookItem";
+
 export default function Page() {
+  const router = useRouter();
+  // console.log(router);
+
   return (
-    <>
-      <h1>search</h1>
-      <h2>search/index.tsx 또는 루트 경로에 search.tsx 생성할 수도 있음</h2>
-    </>
+    <div>
+      {books.map((book) => (
+        <BookItem key={book.id} {...book} />
+      ))}
+    </div>
   );
 }
+
+Page.getLayout = (page: ReactNode) => {
+  return <SearchableLayout>{page}</SearchableLayout>;
+};
