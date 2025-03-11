@@ -1,5 +1,5 @@
-import CustomLayout from "@/components/CustomLayout";
-import { ReactNode } from "react";
+import CustomLayout from '@/layout/CustomLayout';
+import { ReactNode } from 'react';
 
 export default function CustomPage() {
   return (
