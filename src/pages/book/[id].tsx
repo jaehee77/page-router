@@ -2,10 +2,14 @@ import React from 'react';
 import style from '@/styles/onebite.module.css';
 import {
   GetServerSidePropsContext,
+  GetStaticPathsContext,
+  GetStaticPropsContext,
   InferGetServerSidePropsType,
+  InferGetStaticPropsType,
 } from 'next';
 import { fetchOneBook } from '@/lib';
 
+/*
 const mockData = {
   id: 1,
   title: '한 입 크기로 잘라 먹는 리액트',
@@ -17,12 +21,23 @@ const mockData = {
   coverImgUrl:
     'https://shopping-phinf.pstatic.net/main_3888828/38888282618.20230913071643.jpg',
 };
+*/
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext,
+export const getStaticPaths = () => {
+  return {
+    paths: [
+      { params: { id: '1' } },
+      { params: { id: '2' } },
+      { params: { id: '3' } },
+    ],
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (
+  context: GetStaticPropsContext,
 ) => {
   const id = context.params!.id;
-  console.log(id);
   const book = await fetchOneBook(Number(id));
 
   return {
@@ -34,7 +49,7 @@ export const getServerSideProps = async (
 
 export default function Page({
   book,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   if (!book) {
     return '문제가 발생했습니다. 다시 시도하세요';
   }

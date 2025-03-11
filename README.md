@@ -214,14 +214,15 @@ export default function App({
 - 요청이 들어올 때마다 사전 렌더링을 진행함
 
 ** `getServerSideProps` **   
-요청 페이지에서 넥스트 서버가 사전 렌더링을 하게 될때 컴포넌트보다  
+> 요청 페이지에서 넥스트 서버가 사전 렌더링을 하게 될때 컴포넌트보다  
 먼저 실행이 되서 요청 페이지 컴포넌트에 필요한 데이터를 백엔드서버 또는  
 서드파티로부터 데이터를 불러오다던가 하는 그러한 기능을 하게 되는 함수  
 즉, 페이지 역할을 하는 컴포넌트보다 먼저 실행이 되어서 해당 컴포넌트에  
 필요한 데이터를 불러오는 함수이다.
 
-❗️ 사전렌더링이 되는 과정에서 딱 한 번만 실행  
-즉, 서버측에서만 실행되는 함수이다.
+> 사전렌더링이 되는 과정에서 딱 한 번만 실행  
+즉, 서버측에서만 실행되는 함수이다.  
+
 ```
 // 반환값은 반드시 props라는 객체 프로퍼티를 포함하는 단 하나의 객체이어야 함.  
 export const getServerSideProps = () => {
@@ -252,7 +253,10 @@ export default function Home(
   );
 }
 ```
-🔥 `getServerSideProps`가 정의되어 있으면 해당 요청 페이지 컴포넌트는  
+
+<br>
+
+> 🔥 `getServerSideProps`가 정의되어 있으면 해당 요청 페이지 컴포넌트는  
 서버측에서 한 번 먼저 실행이 되고나서 이후 브라우저에서 실행이 된다.  
 즉, 조건없이 `window.location` 같은 코드를 작성하게 되면 서버에서 먼저  
 실행하기 때문에 에러가 발생하게 된다.    
@@ -282,9 +286,12 @@ export default function Home(
 
 <br>
 
-** `getStaticProps` **
+** **`getStaticProps`** **  
+`npm run build`로 터미널에서 확인 가능
 ```
 export const getStaticProps = async () => {
+  console.log("build 후 터미널에서 확인 !!")
+
   const [allBooks, recoBooks] = await Promise.all([
     fetchBooks(),
     fetchRandomBooks(),
@@ -297,6 +304,7 @@ export const getStaticProps = async () => {
     },
   };
 };
+
 export default function Home({
   allBooks,
   recoBooks,
@@ -320,6 +328,35 @@ export default function Home({
 }
 ```
 
+<br>
+
+> **동적 경로 [id].tsx에 SSG 적용하기**
+```
+export const getStaticPaths = () => {
+  return {
+    paths: [
+      { params: { id: 1 } },
+      { params: { id: 2 } },
+      { params: { id: 3 } },
+    ],
+    fallback: false,
+  };
+};
+// fallback: false, 없는 페이지(id)라면 404로 리디렉션
+
+export const getStaticProps = async (
+  context: GetStaticPropsContext,
+) => {
+  const id = context.params!.id;
+  const book = await fetchOneBook(Number(id));
+
+  return {
+    props: {
+      book,
+    },
+  };
+};
+```
 <br>
 
 ✅ 증분 정적 재생성(ISR)
