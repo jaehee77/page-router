@@ -209,7 +209,7 @@ export default function App({
 <br>
 
 ## Next.js의 다양한 사전 렌더링 방식
-✅ 서버 사이드 렌더링(SSR: Server Side Rendering)
+### ✅ 서버 사이드 렌더링(SSR: Server Side Rendering)
 - 가장 기본적인 사전 렌더링 방식
 - 요청이 들어올 때마다 사전 렌더링을 진행함
 
@@ -263,7 +263,7 @@ export default function Home(
 
 <br>
 
-✅ 정적 사이트 생성(SSG: Static Site Generation)
+### ✅ 정적 사이트 생성(SSG: Static Site Generation)
 - SSR의 단점을 해결하는 사전 렌더링 방식
 - 초기 요청시 사전 렌더링중 데이터 페칭까지 완료하여 렌더링을 함
 - 빌드 타임에 미리 페이지를 사전 렌더링 해둠
@@ -358,7 +358,11 @@ export const getStaticProps = async (
 };
 ```
 <br>
+<br>
 
-✅ 증분 정적 재생성(ISR)
-- ???
+
+### ✅ 증분 정적 재생성(ISR: Incremental Static Regeneration)
+---
+- 단순히 SSG 방식으로 생성된 정적 페이지를 일정 시간을 주기로 다시 생성하는 기술
+
 

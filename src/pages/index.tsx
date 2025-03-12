@@ -20,6 +20,8 @@ export const getStaticProps = async () => {
       allBooks,
       recoBooks,
     },
+    // ISR 적용(재검증,재생성하다)
+    revalidate: 3,
   };
 };
 export default function Home({
